@@ -1,9 +1,10 @@
-#include<iostream>
-#include<string>
-#include<fstream>
+#include <iostream>
+#include <fstream>
 #include <ctime>
 #include <sstream>
-#include"funciones.h"
+#include <string>
+
+using namespace std;
 
 typedef unsigned int uint;
 
@@ -44,3 +45,5 @@ typedef struct {
     uint idCliente;
     uint idClase;
 } Reserva;
+
+

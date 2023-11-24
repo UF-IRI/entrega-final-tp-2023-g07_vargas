@@ -1,8 +1,9 @@
 #include<iostream>
 #include<string>
 #include<fstream>
-#include"funciones.h"
-#include"structs.h"
+#include<structs.h>
+#include<funciones.h>
+
 using namespace std;
 
 int main() {
@@ -65,6 +66,7 @@ int main() {
 
 
 
+
     // --X-- Liberar la memoria asignada dinámicamente --X--//
     for (int i = 0; i < cantAsistencias; i++) {
         delete[] asistencias[i].cursosInscriptos;
@@ -72,3 +74,4 @@ int main() {
     delete[] asistencias;
     return 0;
 }
+

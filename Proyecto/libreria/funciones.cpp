@@ -1,3 +1,6 @@
+#include "funciones.h"
+#include "structs.cpp"
+
 //____________________________________________________________
 //           LECTURA DE ARCHIVO BINARIO
 //____________________________________________________________
@@ -43,7 +46,6 @@ void leer_archivo(const char* nombreArchivo, Asistencia*& asistencias, int& cant
 }
 
 
-// Se encarga de la Busqueda de clases repetidas dentro de la asistencia
 
 void buscarRepetidos(Asistencia*& asistencias, int cantAsistencias) {
     for (int i = 0; i < cantAsistencias; i++) {
@@ -75,9 +77,7 @@ void buscarRepetidos(Asistencia*& asistencias, int cantAsistencias) {
     }
 }
 
-
-
-//Nueva --> Actualiza el cupo de las clases tras haber hecho La reserva
+//Nueva--> Actualizar las clases en cuanto a su cantidad de Cupos tras la reserva
 
 void actualizarClases(Asistencia* asistencias, int cantAsistencias, Clase* clases, int cantClases) {
     // Recorrer el array de asistencias
@@ -108,8 +108,7 @@ void actualizarClases(Asistencia* asistencias, int cantAsistencias, Clase* clase
 
 
 
-
-// Esta funcion es para --> imprimir <-- los DATOS_ACTUALIZADOS de las clases (hay menos cupos)
+// Esta funcion es para imprimir los DATOS_ACTUALIZADOS de las clases
 void imprimirClasesActualizadas(Clase* clases, int cantClases) {
 
     // Boludeces para lo visual
@@ -126,67 +125,3 @@ void imprimirClasesActualizadas(Clase* clases, int cantClases) {
         }
     }
 }
-
-
-
-
-
-
-
-
-/*
-// Función para generar datos aleatorios para UNA Asistencia (STRUCT)
-Asistencia generarAsistenciaAleatoria() {
-    const int idClaseMax = 60;          // 33 clases + 27 musculación (según lo visto en el archivo)
-    const int cantInscripcionesMax = 6; // mi plan del gimnasio permite 6 inscripciones por día
-    static int idClienteActual = 0;     // Los idCliente serán secuenciales (1, 2, 3, 4.....)
-
-    // Crear una variable del tipo Asistencia
-    Asistencia asistencia;
-
-    // Asignar un idCliente de manera única y secuencial
-    asistencia.idCliente = idClienteActual++;
-
-    // Generar datos aleatorios para cantInscripciones
-    asistencia.cantInscriptos = rand() % cantInscripcionesMax + 1; // para evitar cantInscriptos == 0
-
-    // Reservar memoria para el array de Inscripcion
-    asistencia.cursosInscriptos = new Inscripcion[asistencia.cantInscriptos];
-
-    // Generar datos aleatorios para cada Inscripcion
-    for (int i = 0; i < asistencia.cantInscriptos; i++) {
-        asistencia.cursosInscriptos[i].idClase = rand() % idClaseMax + 1; // evitar idClase == 0
-        asistencia.cursosInscriptos[i].fechaInscripcion = time(nullptr) - (rand() % 2592000); // fecha aleatoria en los últimos 30 días
-    }
-
-    return asistencia;
-}
-//_______________-------------------------------------------
-
-// Función para generar un array de Asistencia con datos aleatorios
-Asistencia* generarAsistenciasAleatorias(int& cantAsistencias) {
-    const int cantMaximaAsistencias = 100; // Tamaño máximo del array de asistencias
-
-    // Generar un tamaño aleatorio para el array de asistencias
-    cantAsistencias = rand() % cantMaximaAsistencias + 1; // Evitar cantAsistencias == 0
-
-    // Crear el array de asistencias
-    Asistencia* asistencias = new Asistencia[cantAsistencias];
-
-    // Generar asistencias aleatorias
-    for (int i = 0; i < cantAsistencias; i++) {
-        asistencias[i] = generarAsistenciaAleatoria();
-    }
-
-    return asistencias;
-}
-
-// Función para liberar memoria del array de asistencias
-void liberarMemoriaAsistencias(Asistencia* asistencias, int cantAsistencias) {
-    for (int i = 0; i < cantAsistencias; i++) {
-        delete[] asistencias[i].cursosInscriptos;
-    }
-    delete[] asistencias;
-}
-
-*/

@@ -1,4 +1,5 @@
 #include<iostream>
-#include<fstream>
 #include<string>
-
+#include<fstream>
+#include"funciones.h"
+#include"structs.h"
