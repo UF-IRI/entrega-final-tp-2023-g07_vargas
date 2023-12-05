@@ -62,7 +62,7 @@ private slots:
         asistencia.cursosInscriptos[1].idClase = 2;
         asistencia.cursosInscriptos[2].idClase = 1;  // Aca el duplicado
 
-        //Llamar a la función que queremos probar
+        //Llamar a la función que a testear
         buscarRepetidos(&asistencia, 1);
 
         // Verificar la prueba

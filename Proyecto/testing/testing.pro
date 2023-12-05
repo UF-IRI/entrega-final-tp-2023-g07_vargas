@@ -22,5 +22,3 @@ else:unix: LIBS += -L$$OUT_PWD/../libreria/ -llibreria
 INCLUDEPATH += $$PWD/../libreria
 DEPENDPATH += $$PWD/../libreria
 
-QT += testlib
-SOURCES += tst_proyecto.cpp funciones.cpp
