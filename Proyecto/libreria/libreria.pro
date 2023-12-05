@@ -10,13 +10,12 @@ CONFIG += c++17
 SOURCES += \
     funciones.cpp \
     libreria.cpp \
-    main.cpp \
-    structs.cpp
+    main.cpp
 
 HEADERS += \
     funciones.h \
     libreria_global.h \
-    structs.h
+    libreria.h
 
 # Default rules for deployment.
 unix {

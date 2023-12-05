@@ -1,19 +1,18 @@
-#include"funciones.h"
 #include <iostream>
 #include <fstream>
 #include <ctime>
 #include <sstream>
 #include <string>
+#include "funciones.h"
 
 using namespace std;
-typedef unsigned int uint;
 
+typedef unsigned int uint;
 
 int main() {
 
-    // !!!!!  LE ESTOY AGREGANDO UN ATRIBUTO MAS A LAS CLASES --> el "CUPO"  !!!!!!!
+    // !!!!!  LE ESTOY AGREGANDO UN ATRIBUTO MAS A LAS CLASES --> el "CUPO"  !!!!!!!!!!
 
-    cout<<"5/12"<<endl;
     Clase clases[60] = {
         {1, "Spinning", 8, 45}, {2, "Spinning", 10, 45}, {3, "Spinning", 12, 45}, {4, "Spinning", 16, 45}, {5, "Spinning", 18, 45},
         {6, "Yoga", 9, 25}, {7, "Yoga", 10, 25}, {8, "Yoga", 11, 25}, {9, "Yoga", 15, 25}, {10, "Yoga", 16, 25},
@@ -115,8 +114,8 @@ int main() {
 
 
     //_________________________________________________________________________________________________________
-    // Puedo testear que se hayan escrito nuevos Datos en el Binario Original repitiendo la lectura e impresion
-    // Este BLOQUE puedo borrarlo posteriormente, solo queria testear si guardaba bien en el archivo
+    // Puedo testear que se hayan escrito nuevos Datos sobre el Binario Original repitiendo la lectura e impresion
+    // Este BLOQUE puedo borrarlo posteriormente, solo queria testear si guardaba bien en el binario
 
 
     leer_archivo("asistencias_1697673600000.dat", asistencias, cantAsistencias);

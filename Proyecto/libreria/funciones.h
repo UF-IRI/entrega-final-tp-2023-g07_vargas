@@ -13,7 +13,10 @@ void actualizarClases(Asistencia* asistencias, int cantAsistencias, Clase* clase
 void imprimirClasesActualizadas(Clase* clases, int cantClases);
 
 //5)
-void escribirAsistenciasEnArchivo(const char* nombreArchivo, Asistencia* arrayAsistencias, uint tamanoArray);
+Asistencia generarAsistenciaAleatoria();
 
 //6)
+void escribirAsistenciasEnArchivo(const char* nombreArchivo, Asistencia* arrayAsistencias, uint tamanoArray);
+
+//7)
 void liberarMemoriaAsistencias(Asistencia* asistencias, int cantAsistencias);
