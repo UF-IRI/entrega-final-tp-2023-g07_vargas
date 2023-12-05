@@ -14,10 +14,8 @@ SOURCES += \
     structs.cpp
 
 HEADERS += \
-    archivos.h \
     funciones.h \
     libreria_global.h \
-    libreria.h \
     structs.h
 
 # Default rules for deployment.

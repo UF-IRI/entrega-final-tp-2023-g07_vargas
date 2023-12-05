@@ -46,4 +46,3 @@ typedef struct {
     uint idClase;
 } Reserva;
 
-
