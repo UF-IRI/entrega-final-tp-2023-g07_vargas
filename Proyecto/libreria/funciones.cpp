@@ -1,5 +1,4 @@
-#include "funciones.h"
-#include "structs.cpp"
+#include"structs.h"
 
 //____________________________________________________________
 //           LECTURA DE ARCHIVO BINARIO
@@ -45,8 +44,9 @@ void leer_archivo(const char* nombreArchivo, Asistencia*& asistencias, int& cant
     }
 }
 
-
-
+//______________________________________________________
+// Funcion -> BUSCAR ASISTENCIAS REPETIDAS EN EL ARCHIVO
+//------------------------------------------------------
 void buscarRepetidos(Asistencia*& asistencias, int cantAsistencias) {
     for (int i = 0; i < cantAsistencias; i++) {
         // Crear un nuevo array de Inscripcion sin repetidos
@@ -77,8 +77,8 @@ void buscarRepetidos(Asistencia*& asistencias, int cantAsistencias) {
     }
 }
 
-//Nueva--> Actualizar las clases en cuanto a su cantidad de Cupos tras la reserva
 
+//Nueva -> actualiza el Numero de cupos disponibles para cada clase
 void actualizarClases(Asistencia* asistencias, int cantAsistencias, Clase* clases, int cantClases) {
     // Recorrer el array de asistencias
     for (int i = 0; i < cantAsistencias; i++) {
@@ -107,7 +107,6 @@ void actualizarClases(Asistencia* asistencias, int cantAsistencias, Clase* clase
 }
 
 
-
 // Esta funcion es para imprimir los DATOS_ACTUALIZADOS de las clases
 void imprimirClasesActualizadas(Clase* clases, int cantClases) {
 
@@ -115,7 +114,9 @@ void imprimirClasesActualizadas(Clase* clases, int cantClases) {
     cout << " " << endl;
     cout << "- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -" << endl;
     cout << " " << endl;
-    cout << "DATOS ACTUALIZADOS DE LAS CLASES:" << endl;
+    cout << "          DATOS ACTUALIZADOS DE LAS CLASES:" << endl;
+    cout << "  Ahora con los cupos disminuidos tras la inscripcion " << endl;
+    cout << "- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -" << endl;
 
     for (int i = 0; i < cantClases; ++i) {
         // Solo imprimir las clases con cupo
@@ -124,4 +125,73 @@ void imprimirClasesActualizadas(Clase* clases, int cantClases) {
                 " || Hora--> " << clases[i].horario << " || Cupo--> " << clases[i].cupo << endl;
         }
     }
+}
+
+
+
+Asistencia generarAsistenciaAleatoria() {
+    Asistencia asistencia;
+
+    // Genera un idCliente aleatorio entre 1 y 100
+    asistencia.idCliente = rand() % 100 + 1;
+
+    // Genera una cantidad aleatoria clases a las que se inscribe (entre 1 y 3 clases)
+    asistencia.cantInscriptos = rand() % 3 + 1;
+
+    // rreserva memoria para el array de Inscripcion
+    asistencia.cursosInscriptos = new Inscripcion[asistencia.cantInscriptos];
+
+    // genera datos aleatorios para cada Inscripcion
+    for (uint i = 0; i < asistencia.cantInscriptos; ++i) {
+        // Se genera idClase aleatorio
+        asistencia.cursosInscriptos[i].idClase = rand() % 10 + 1;
+
+        // Se generar fechaInscripcion aleatoria (en este caso, se usa el tiempo actual como base)
+        asistencia.cursosInscriptos[i].fechaInscripcion = time(nullptr) - rand() % 1000000;
+    }
+
+    return asistencia;
+}
+
+
+
+// Función para escribir el array de asistencias en un archivo binario
+void escribirAsistenciasEnArchivo(const char* nombreArchivo, Asistencia* arrayAsistencias, uint tamanoArray) {
+    // Se abre el archivo binario en modo escritura binaria
+    ofstream archivoBinario(nombreArchivo, ios::binary);
+
+    // verifico si el archivo se abrió correctamente
+    if (archivoBinario.is_open()) {
+        // Recorre el array de asistencias
+        for (uint i = 0; i < tamanoArray; ++i) {
+            // Escribir el idCliente en el archivo binario
+            archivoBinario.write((char*)&arrayAsistencias[i].idCliente, sizeof(uint));
+
+            // Escribir la cantidad de inscriptos en el archivo binario
+            archivoBinario.write((char*)&arrayAsistencias[i].cantInscriptos, sizeof(uint));
+
+            // Recorrer el array de inscripciones
+            for (uint j = 0; j < arrayAsistencias[i].cantInscriptos; ++j) {
+                // Escribir cada inscripción en el archivo binario
+                archivoBinario.write((char*)&arrayAsistencias[i].cursosInscriptos[j], sizeof(Inscripcion));
+            }
+        }
+
+        // Ceroo el archivo
+        archivoBinario.close();
+        cout << " --> SE ESCRIBIO CORRECTAMENTE EN EL CSV :) <-- " << endl;
+    }
+    else {
+        // Fail
+        cout << "No se pudo abrir el archivo para escribir :( " << endl;
+    }
+}
+
+
+// Función para liberar memoria del array de asistencias
+void liberarMemoriaAsistencias(Asistencia* asistencias, int cantAsistencias) {
+    for (int i = 0; i < cantAsistencias; i++) {
+        delete[] asistencias[i].cursosInscriptos;
+    }
+    delete[] asistencias;
 }

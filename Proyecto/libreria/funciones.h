@@ -1,22 +1,17 @@
-#include<iostream>
-#include<string>
-#include<fstream>
-#include "structs.cpp"
+#include"funciones.cpp"
 
-//1) LECTURA DEL ARCHIVO BINARIO
+
+//1)
 void leer_archivo(const char* nombreArchivo, Asistencia*& asistencias, int& cantAsistencias);
-
-
-//2) Busca los idClase repetidos en una asistencia
+//2)
 void buscarRepetidos(Asistencia*& asistencias, int cantAsistencias);
-
-
-//3) Actualizar las clases en cuanto a su cantidad de Cupos tras la reserva
+//3)
 void actualizarClases(Asistencia* asistencias, int cantAsistencias, Clase* clases, int cantClases);
-
-
-//4) RETORNA-> un array de Asistencias de tamanio aleatorio y
+//4)
 void imprimirClasesActualizadas(Clase* clases, int cantClases);
-
-
-
+//5)
+Asistencia generarAsistenciaAleatoria();
+//6)
+void escribirAsistenciasEnArchivo(const char* nombreArchivo, Asistencia* arrayAsistencias, uint tamanoArray);
+//7)
+void liberarMemoriaAsistencias(Asistencia* asistencias, int cantAsistencias);

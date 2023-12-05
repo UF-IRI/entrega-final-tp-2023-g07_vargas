@@ -1,10 +1,4 @@
-#include<iostream>
-#include<string>
-#include<fstream>
-#include<structs.h>
-#include<funciones.h>
-
-using namespace std;
+#include"funciones.h"
 
 int main() {
 
@@ -26,16 +20,18 @@ int main() {
         {54, "Musculacion", 17, 100}, {55, "Musculacion", 17.30, 100}, {56, "Musculacion", 18, 100}, {57, "Musculacion", 18.30, 100},
         {58, "Musculacion", 19, 100}, {59, "Musculacion", 19.30, 100}, {60, "Musculacion", 20, 100}
     };
-
+    //VARIABLES A USAR
     Asistencia* asistencias = nullptr;
     int cantAsistencias;
 
     leer_archivo("asistencias_1697673600000.dat", asistencias, cantAsistencias);
     buscarRepetidos(asistencias, cantAsistencias);
 
-    cout << "LECTURA DEL ARCHIVO BINARIOoo : " << endl;
-    cout << "LA CANTIDAD DE ASISTENCIAS son: " << cantAsistencias << endl;
+    cout << " - - - - - - - - - - - - - - - - - - - - - - - - - - - - - " << endl;
+    cout << " LECTURA DEL ARCHIVO BINARIO : " << endl;
+    cout << "\nLA CANTIDAD DE ASISTENCIAS son: " << cantAsistencias << endl;
     cout << " " << endl;
+    cout << " - - - - - - - - - - - - - - - - - - - - - - - - - - - - - " << endl;
 
     // Imprimir las asistencias Corregidas :´D
     for (int i = 0; i < cantAsistencias; i++) {
@@ -50,21 +46,67 @@ int main() {
 
     cout << " " << endl;
     cout << " --------------------------------------------------------------------------  " << endl;
-    cout << " DATOS DE LAS CLASES (seria lo del arch. csv) " << endl;
+    cout << "                      DATOS DE LAS CLASES \n" << endl;
+    cout << " --------------------------------------------------------------------------  " << endl;
+
     // Imprimir los DATOS de las clases
     for (int i = 0; i < 60; ++i) {
         cout << "idClase--> " << clases[i].idClase << " || Nombre_clase--> " << clases[i].nombre <<
             " || Hora--> " << clases[i].horario << " || Cupo--> " << clases[i].cupo << endl;
     }
 
-
-    // Llamada a la función actualizarClases
+    srand(time(nullptr));
+    // Llama a la función actualizarClases
     actualizarClases(asistencias, cantAsistencias, clases, 60);
 
-    // Llamada a la función imprimirClases
+    // Llama a la función imprimirClases
     imprimirClasesActualizadas(clases, 60);
 
 
+    // R A N D O M
+    //     ||
+    //     ||
+    //     \/
+
+
+    srand(time(nullptr)); //SEMILLA para que no se repita la misma STRUCT Asistencia (?
+
+    // Genera un tamanio random (Entre 1 y 100) para el ARRAY de asistencias
+    uint tamanioArray = rand() % 100 + 1;
+
+    // sE crea un array dimaico de asistencias
+    Asistencia* arrayAsistencias = new Asistencia[tamanioArray];  // <------ ARRAY DONDE ALMACENO LAS ASISTENCIAS RANDOM !  ( arrayAsistencias )
+
+    // Llenar el array con asistencias generadas aleatoriamente
+    for (uint i = 0; i < tamanioArray; ++i) {
+        arrayAsistencias[i] = generarAsistenciaAleatoria();
+    }
+
+    // Mostrar las asistencias generadas
+    cout << "- - - - - - - - - - - - - - - - - - - - - - - - - - - " << endl;
+    cout << "\nARRAY DE ASISTENCIAS GENERADAS DE MANERA ALEATORIA :" << endl;
+    cout << "- - - - - - - - - - - - - - - - - - - - - - - - - - - " << endl;
+
+    for (uint i = 0; i < tamanioArray; ++i) {
+        cout << "idCliente--> " << arrayAsistencias[i].idCliente << " || " << "cantInscriptos--> " << arrayAsistencias[i].cantInscriptos;
+
+        // Mostramos cada inscripcion
+        cout << " || cursosInscriptos: { ";
+        for (uint j = 0; j < arrayAsistencias[i].cantInscriptos; ++j) {
+            cout << "(" << arrayAsistencias[i].cursosInscriptos[j].idClase << ", "
+                 << arrayAsistencias[i].cursosInscriptos[j].fechaInscripcion << ") ";
+        }
+        cout << "}" << endl;
+    }
+    // Llamar a la función para escribir el array de asistencias en el archivo binario
+    escribirAsistenciasEnArchivo("asistencias_1697673600000.dat", arrayAsistencias, tamanioArray);
+
+
+    // Hay que liberar la memoria reservada para el array de asistencias y sus cursosInscriptos (ambos arrays)
+    for (uint i = 0; i < tamanioArray; ++i) {
+        delete[] arrayAsistencias[i].cursosInscriptos;
+    }
+    delete[] arrayAsistencias;
 
 
     // --X-- Liberar la memoria asignada dinámicamente --X--//
@@ -74,4 +116,3 @@ int main() {
     delete[] asistencias;
     return 0;
 }
-
